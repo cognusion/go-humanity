@@ -19,9 +19,9 @@ func DurationFormat(ns int64) string {
 }
 
 // ByteFormat returns a human-readable string representation of a byte count
-func ByteFormat(num_in int64) string {
+func ByteFormat(numIn int64) string {
 	suffix := "B"
-	num := float64(num_in)
+	num := float64(numIn)
 	units := []string{"", "K", "M", "G", "T", "P", "E", "Z"} // "Y" caught  below
 	for _, unit := range units {
 		if num < 1024.0 {
