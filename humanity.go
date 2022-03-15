@@ -4,8 +4,13 @@ import (
 	"fmt"
 )
 
+// Number is an abstraction to support generic numbers as inputs
+type Number interface {
+	int | int64 | float64
+}
+
 // DurationFormat returns a human-readable string representation of nanosecond number
-func DurationFormat(ns int64) string {
+func DurationFormat[N Number](ns N) string {
 	suffix := "s"
 	num := float64(ns)
 	units := []string{"n", "u", "m"}
@@ -19,7 +24,7 @@ func DurationFormat(ns int64) string {
 }
 
 // ByteFormat returns a human-readable string representation of a byte count
-func ByteFormat(numIn int64) string {
+func ByteFormat[N Number](numIn N) string {
 	suffix := "B"
 	num := float64(numIn)
 	units := []string{"", "K", "M", "G", "T", "P", "E", "Z"} // "Y" caught  below
