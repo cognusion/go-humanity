@@ -2,11 +2,13 @@ package humanity
 
 import (
 	"fmt"
+
+	"golang.org/x/exp/constraints"
 )
 
 // Number is an abstraction to support generic numbers as inputs
 type Number interface {
-	int | int64 | float64
+	constraints.Integer | constraints.Float
 }
 
 // DurationFormat returns a human-readable string representation of nanosecond number
