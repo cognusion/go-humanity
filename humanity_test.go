@@ -1,6 +1,7 @@
 package humanity
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 	"testing"
@@ -98,6 +99,45 @@ func Test_BytesInt64(t *testing.T) {
 			}
 		}
 
+	})
+}
+
+func Test_StringAsBytes(t *testing.T) {
+	units := []string{"B", "KB", "MB", "GB", "TB", "PB"}
+
+	Convey("Looping through increasingly larger number, the numbers are accurate", t, func() {
+		for i, unit := range units {
+			snum := fmt.Sprintf("%d%s", 1, unit)
+			var n int64 = 1
+			for l := 0; l < i; l++ {
+				n *= 1024
+			}
+
+			vn, err := StringAsBytes(snum)
+			So(err, ShouldBeNil)
+			So(vn, ShouldEqual, n)
+		}
+	})
+
+	Convey("Bad data is treated as such", t, func() {
+
+		Convey("... decimals are stupid", func() {
+			n, err := StringAsBytes("1.5MB")
+			So(n, ShouldEqual, -1)
+			So(err, ShouldNotBeNil)
+		})
+
+		Convey("... no suffix is wrong", func() {
+			n, err := StringAsBytes("600")
+			So(n, ShouldEqual, -1)
+			So(err, ShouldNotBeNil)
+		})
+
+		Convey("... large suffixes are not supported", func() {
+			n, err := StringAsBytes("600EB")
+			So(n, ShouldEqual, -1)
+			So(err, ShouldNotBeNil)
+		})
 	})
 }
 
