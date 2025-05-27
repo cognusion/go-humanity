@@ -1,12 +1,16 @@
 module github.com/cognusion/go-humanity
 
-go 1.18
+go 1.23.0
 
-require github.com/smartystreets/goconvey v1.7.2
+toolchain go1.24.3
 
 require (
-	github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1 // indirect
+	github.com/smartystreets/goconvey v1.8.1
+	golang.org/x/exp v0.0.0-20250506013437-ce4c2cf36ca6
+)
+
+require (
+	github.com/gopherjs/gopherjs v1.17.2 // indirect
 	github.com/jtolds/gls v4.20.0+incompatible // indirect
-	github.com/smartystreets/assertions v1.2.0 // indirect
-	golang.org/x/exp v0.0.0-20220323121947-b445f275a754 // indirect
+	github.com/smarty/assertions v1.15.0 // indirect
 )
